@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgreementLens™ — IAA Protocol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-corner tl"></div><div class="pre-corner tr"></div>
+  <div class="pre-corner bl"></div><div class="pre-corner br"></div>
+  <div class="pre-sys">SYS://IAA_PROTOCOL_INIT</div>
+  <div class="pre-title">AgreementLens™</div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
+  <div class="pre-pct" id="prePct">0%</div>
+  <div class="pre-status">LOADING ANNOTATION SYSTEM...</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-box">α</div>
+    AgreementLens™
+  </div>
+  <div class="nav-right">
+    <button class="nav-link" onclick="document.getElementById('uploadAnchor').scrollIntoView({behavior:'smooth'})">ANALYZE</button>
+    <button class="nav-link" onclick="document.getElementById('benchAnchor').scrollIntoView({behavior:'smooth'})">BENCHMARKS</button>
+    <div class="nav-status"><span class="nav-dot"></span>SYSTEM READY</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tape">
+    <div class="hero-tape-inner">
+      <span>IAA PROTOCOL</span><span class="sep"> × </span><span>ANNOTATION RELIABILITY</span><span class="sep"> × </span><span>KRIPPENDORFF'S α</span><span class="sep"> × </span><span>FLEISS' κ</span><span class="sep"> × </span><span>GWET'S AC1</span><span class="sep"> × </span><span>COHEN'S κ</span><span class="sep"> × </span><span>CALIBRATION ANALYSIS</span><span class="sep"> × </span><span>AI TRAINING QUALITY</span><span class="sep"> × </span>
+      <span>IAA PROTOCOL</span><span class="sep"> × </span><span>ANNOTATION RELIABILITY</span><span class="sep"> × </span><span>KRIPPENDORFF'S α</span><span class="sep"> × </span><span>FLEISS' κ</span><span class="sep"> × </span><span>GWET'S AC1</span><span class="sep"> × </span><span>COHEN'S κ</span><span class="sep"> × </span><span>CALIBRATION ANALYSIS</span><span class="sep"> × </span><span>AI TRAINING QUALITY</span><span class="sep"> × </span>
+    </div>
+  </div>
+  <div class="hero-main">
+    <!-- LEFT: cream bg, ink text -->
+    <div class="hero-left">
+      <div>
+        <div class="hero-sys-line">SYS://IAA_ANALYSIS_SUITE · 2025</div>
+        <h1 class="hero-h1">Measure<br><span class="thin">annotation</span><br>agreement.</h1>
+        <p class="hero-sub">UPLOAD YOUR ANNOTATION DATA.<br>COMPUTE KRIPPENDORFF'S α, FLEISS' κ,<br>GWET'S AC1 AND PAIRWISE COHEN'S κ —<br>WITH CALIBRATION ANALYSIS AND<br>AI-POWERED INTERPRETATION.</p>
+        <div class="hero-actions">
+          <button class="btn-ink" onclick="document.getElementById('uploadAnchor').scrollIntoView({behavior:'smooth'})">START ANALYSIS →</button>
+          <button class="btn-outline" onclick="loadDemo();document.getElementById('uploadAnchor').scrollIntoView({behavior:'smooth'})">LOAD DEMO</button>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-cell"><div class="hero-meta-label">Metrics computed</div><div class="hero-meta-val">04</div><div class="hero-meta-sub">IAA SCORES</div></div>
+        <div class="hero-meta-cell" style="border-left:1px solid var(--border)"><div class="hero-meta-label">Scale types</div><div class="hero-meta-val">03</div><div class="hero-meta-sub">ORD / NOM / INT</div></div>
+        <div class="hero-meta-cell" style="border-top:1px solid var(--border)"><div class="hero-meta-label">Benchmarks</div><div class="hero-meta-val">04</div><div class="hero-meta-sub">PUBLISHED STUDIES</div></div>
+        <div class="hero-meta-cell" style="border-top:1px solid var(--border);border-left:1px solid var(--border)"><div class="hero-meta-label">Export formats</div><div class="hero-meta-val">03</div><div class="hero-meta-sub">PDF / JSON / TXT</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ink/dark bg, cream content + animated SVG art -->
+    <div class="hero-right">
+      <div class="hero-art-wrap">
+        <svg class="hero-art" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="500" fill="#0D0C0A"/>
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(240,235,225,0.05)" stroke-width="0.5"/>
+            </pattern>
+            <pattern id="grid2" width="200" height="200" patternUnits="userSpaceOnUse">
+              <path d="M 200 0 L 0 0 0 200" fill="none" stroke="rgba(240,235,225,0.08)" stroke-width="0.8"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="500" fill="url(#grid)"/>
+          <rect width="600" height="500" fill="url(#grid2)"/>
+          <g opacity="0.3">
+            <polyline points="0,280 60,260 120,300 180,240 240,290 300,220 360,270 420,230 480,265 540,245 600,258" fill="none" stroke="#F0EBE1" stroke-width="1.5">
+              <animate attributeName="points" dur="6s" repeatCount="indefinite" values="0,280 60,260 120,300 180,240 240,290 300,220 360,270 420,230 480,265 540,245 600,258;0,270 60,280 120,255 180,290 240,260 300,245 360,285 420,250 480,240 540,275 600,248;0,280 60,260 120,300 180,240 240,290 300,220 360,270 420,230 480,265 540,245 600,258" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+            </polyline>
+            <polyline points="0,310 60,290 120,330 180,270 240,320 300,255 360,300 420,265 480,298 540,278 600,291" fill="none" stroke="#F0EBE1" stroke-width="0.8" stroke-dasharray="4 3"/>
+            <polyline points="0,255 60,235 120,275 180,215 240,265 300,195 360,248 420,208 480,242 540,222 600,235" fill="none" stroke="#B8A882" stroke-width="1.5">
+              <animate attributeName="points" dur="8s" repeatCount="indefinite" values="0,255 60,235 120,275 180,215 240,265 300,195 360,248 420,208 480,242 540,222 600,235;0,245 60,255 120,230 180,265 240,235 300,220 360,260 420,225 480,215 540,250 600,225;0,255 60,235 120,275 180,215 240,265 300,195 360,248 420,208 480,242 540,222 600,235" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+            </polyline>
+          </g>
+          <g id="nodes" opacity="0.7">
+            <circle cx="120" cy="150" r="4" fill="#F0EBE1"><animate attributeName="opacity" values="0.6;1;0.6" dur="3.2s" repeatCount="indefinite"/></circle>
+            <circle cx="280" cy="110" r="3" fill="#F0EBE1"><animate attributeName="opacity" values="1;0.4;1" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="400" cy="170" r="5" fill="#B8A882"><animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/></circle>
+            <circle cx="180" cy="220" r="3" fill="#F0EBE1"><animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.8s" repeatCount="indefinite"/></circle>
+            <circle cx="470" cy="130" r="4" fill="#F0EBE1"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="3.6s" repeatCount="indefinite"/></circle>
+            <circle cx="340" cy="200" r="3" fill="#9A8C6A"><animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="80" cy="195" r="3" fill="#F0EBE1"><animate attributeName="opacity" values="1;0.5;1" dur="4.2s" repeatCount="indefinite"/></circle>
+            <circle cx="520" cy="200" r="4" fill="#F0EBE1"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/></circle>
+          </g>
+          <g opacity="0.1" stroke="#F0EBE1" stroke-width="0.8">
+            <line x1="120" y1="150" x2="280" y2="110"/>
+            <line x1="280" y1="110" x2="400" y2="170"/>
+            <line x1="400" y1="170" x2="470" y2="130"/>
+            <line x1="120" y1="150" x2="180" y2="220"/>
+            <line x1="180" y1="220" x2="340" y2="200"/>
+            <line x1="340" y1="200" x2="400" y2="170"/>
+            <line x1="80" y1="195" x2="180" y2="220"/>
+            <line x1="470" y1="130" x2="520" y2="200"/>
+            <line x1="340" y1="200" x2="520" y2="200"/>
+          </g>
+          <g transform="translate(60,370)" opacity="0.25">
+            <rect x="0"   y="-60" width="28" height="60"  fill="#F0EBE1"><animate attributeName="y" values="-60;-90;-60" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/><animate attributeName="height" values="60;90;60" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></rect>
+            <rect x="36"  y="-80" width="28" height="80"  fill="#B8A882"><animate attributeName="y" values="-80;-55;-80" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/><animate attributeName="height" values="80;55;80" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></rect>
+            <rect x="72"  y="-45" width="28" height="45"  fill="#F0EBE1"><animate attributeName="y" values="-45;-70;-45" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/><animate attributeName="height" values="45;70;45" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></rect>
+            <rect x="108" y="-95" width="28" height="95"  fill="#F0EBE1" opacity="0.5"><animate attributeName="y" values="-95;-65;-95" dur="4.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/><animate attributeName="height" values="95;65;95" dur="4.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></rect>
+          </g>
+          <text x="10"  y="20"  font-family="Space Mono" font-size="8" fill="rgba(240,235,225,0.22)" letter-spacing="2">X:00.0124 Y:01.3670</text>
+          <text x="10"  y="490" font-family="Space Mono" font-size="8" fill="rgba(240,235,225,0.22)" letter-spacing="2">SYS://VISUAL_FEED</text>
+          <text x="490" y="20"  font-family="Space Mono" font-size="8" fill="rgba(240,235,225,0.22)" letter-spacing="2" text-anchor="end">RES:4096</text>
+        </svg>
+        <!-- HUD overlay on the dark panel -->
+        <div class="hero-hud">
+          <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+          <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+          <div class="hud-crosshair"></div>
+          <div class="hud-label tl">SYS://ACTIVE</div>
+          <div class="hud-label tr">RES:4096×4096</div>
+          <div class="hud-label bl">PROTOCOL:IAA_v2</div>
+          <div class="hud-label br">STATUS:NOMINAL</div>
+          <div class="hud-coords">X:00.0124 // Y:01.3670 // Z:00.0088</div>
+        </div>
+      </div>
+      <!-- live metrics bar -->
+      <div class="hero-right-overlay">
+        <div class="hero-right-title">LIVE METRICS</div>
+        <div class="hero-right-data">
+          <div class="hrd-cell"><div class="hrd-label">Kripp. α</div><div class="hrd-val" id="hv0">—</div><div class="hrd-bar"><div class="hrd-bar-fill" id="hb0"></div></div></div>
+          <div class="hrd-cell"><div class="hrd-label">Fleiss' κ</div><div class="hrd-val" id="hv1">—</div><div class="hrd-bar"><div class="hrd-bar-fill" id="hb1"></div></div></div>
+          <div class="hrd-cell"><div class="hrd-label">Gwet AC1</div><div class="hrd-val" id="hv2">—</div><div class="hrd-bar"><div class="hrd-bar-fill" id="hb2"></div></div></div>
+          <div class="hrd-cell"><div class="hrd-label">Cohen κ</div><div class="hrd-val" id="hv3">—</div><div class="hrd-bar"><div class="hrd-bar-fill" id="hb3"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS READOUT (dark strip) -->
+<section class="metrics-section" id="metricsAnchor">
+  <div class="metrics-top">
+    <div>
+      <div class="sec-eyebrow" style="color:rgba(184,168,130,.6)"><span style="background:var(--gold);display:inline-block;width:24px;height:1px;vertical-align:middle;margin-right:12px"></span>PROTOCOL OUTPUT</div>
+      <h2 style="color:var(--bg);font-family:var(--sans);font-size:clamp(28px,3vw,40px);font-weight:700;letter-spacing:-.03em">Reliability readout</h2>
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;color:rgba(240,235,225,.25);letter-spacing:.12em;text-align:right">
+      SYS://IAA_METRICS<br><span id="metaTs" style="color:rgba(240,235,225,.15)">AWAITING INPUT</span>
+    </div>
+  </div>
+  <div class="metrics-grid" id="metGrid">
+    <div class="m-card"><div class="m-card-sys">METRIC // 01</div><div class="m-card-val">—</div><div class="m-card-name">Krippendorff's α</div><div class="m-card-sub">ORDINAL · MISSING-SAFE</div></div>
+    <div class="m-card"><div class="m-card-sys">METRIC // 02</div><div class="m-card-val">—</div><div class="m-card-name">Fleiss' κ</div><div class="m-card-sub">MULTI-RATER · NOMINAL</div></div>
+    <div class="m-card"><div class="m-card-sys">METRIC // 03</div><div class="m-card-val">—</div><div class="m-card-name">Gwet's AC1</div><div class="m-card-sub">PREVALENCE-ROBUST</div></div>
+    <div class="m-card"><div class="m-card-sys">METRIC // 04</div><div class="m-card-val">—</div><div class="m-card-name">Avg Cohen's κ</div><div class="m-card-sub">PAIRWISE AVERAGE</div></div>
+  </div>
+</section>
+
+<!-- UPLOAD -->
+<section class="upload-section section" id="uploadAnchor">
+  <div class="sec-eyebrow">DATA INPUT</div>
+  <h2 class="sec-h2" style="margin-bottom:48px">Upload annotation data</h2>
+  <div class="upload-inner">
+    <div>
+      <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileIn').click()">
+        <div class="uz-bl"></div><div class="uz-br"></div>
+        <div class="upload-icon-frame">α</div>
+        <div class="upload-title">Drop CSV here</div>
+        <div class="upload-sub">OR CLICK TO BROWSE FILES<br>ROWS = ITEMS · COLUMNS = ANNOTATORS</div>
+        <div class="fmt-row">
+          <span class="fmt-tag">.CSV</span><span class="fmt-tag">NUMERIC</span><span class="fmt-tag">CATEGORICAL</span>
+        </div>
+        <input type="file" id="fileIn" accept=".csv" style="display:none">
+      </div>
+      <div class="btns">
+        <button class="btn-ink" onclick="loadDemo()">⚡ LOAD DEMO</button>
+        <button class="btn-ghost hidden" id="clearBtn" onclick="clearAll()">✕ CLEAR</button>
+      </div>
+    </div>
+    <div class="upload-info-panel">
+      <div class="info-block">
+        <div class="info-label">File format</div>
+        <div class="info-code">item, Ann1, Ann2, Ann3<br>Q1,   3,    3,    2<br>Q2,   1,    2,    1<br>Q3,   4,    4,    4</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Supported scales</div>
+        <div class="info-text">ORDINAL — values have rank order (1–5 ratings)<br>NOMINAL — unordered categories (labels)<br>INTERVAL — equally spaced numeric scores</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Missing data</div>
+        <div class="info-text">Leave cells empty. Krippendorff's α handles missing annotations natively — no imputation required.</div>
+      </div>
+    </div>
+  </div>
+  <div id="prevSec" class="hidden" style="margin-top:48px">
+    <div class="sec-head">
+      <div class="sec-lbl">DATA PREVIEW</div>
+      <span id="dataStats" style="font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em"></span>
+    </div>
+    <div class="prev-wrap"><table class="prev-table" id="prevTbl"></table></div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section hidden" id="resSec">
+  <div class="results-top">
+    <div>
+      <div class="sec-eyebrow">ANALYSIS OUTPUT</div>
+      <h2 class="sec-h2" style="margin-bottom:0">Results</h2>
+    </div>
+    <div style="text-align:right">
+      <div class="sec-lbl" style="justify-content:flex-end">SCALE TYPE</div>
+      <div class="type-bar">
+        <button class="tgl on" data-t="ordinal" onclick="swType(this)">ORDINAL</button>
+        <button class="tgl" data-t="nominal" onclick="swType(this)">NOMINAL</button>
+        <button class="tgl" data-t="interval" onclick="swType(this)">INTERVAL</button>
+      </div>
+      <div class="type-note" id="typeNote">Ordinal: values carry rank order. Krippendorff's α applies ordinal distance weighting.</div>
+    </div>
+  </div>
+  <div class="tab-row">
+    <button class="tab on" onclick="swTab('pw',this)">PAIRWISE HEATMAP</button>
+    <button class="tab" onclick="swTab('cal',this)">CALIBRATION</button>
+    <button class="tab" onclick="swTab('items',this)">PER-ITEM</button>
+    <button class="tab" onclick="swTab('cmp',this)">COMPARISON</button>
+    <button class="tab" id="benchAnchor" onclick="swTab('bm',this)">BENCHMARKS</button>
+  </div>
+  <div id="tab-pw" class="tab-panel on">
+    <div class="chart-card">
+      <div class="cc-bl"></div><div class="cc-br"></div>
+      <div class="cc-head"><div class="cc-title">Pairwise annotator agreement</div><div class="cc-sub">COHEN'S κ BETWEEN EACH PAIR · HOVER FOR EXACT VALUES</div></div>
+      <div class="legend">
+        <div class="leg-i"><div class="leg-dot" style="background:#5BBFA0"></div>STRONG ≥ 0.75</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#C8A44A"></div>MODERATE 0.4–0.75</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#C45A5A"></div>WEAK &lt; 0.4</div>
+      </div>
+      <div style="position:relative;height:300px"><canvas id="hwChart" role="img" aria-label="Pairwise heatmap"></canvas></div>
+    </div>
+  </div>
+  <div id="tab-cal" class="tab-panel">
+    <div class="g2">
+      <div class="chart-card">
+        <div class="cc-bl"></div><div class="cc-br"></div>
+        <div class="cc-head"><div class="cc-title">Rating distribution</div><div class="cc-sub">EACH ANNOTATOR'S RATING PER ITEM</div></div>
+        <div style="position:relative;height:280px"><canvas id="calChart" role="img" aria-label="Calibration grid"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="cc-bl"></div><div class="cc-br"></div>
+        <div class="cc-head"><div class="cc-title">Systematic bias</div><div class="cc-sub">AVERAGE RATING VS GROUP MEAN</div></div>
+        <div class="calib-list" id="calBars"></div>
+      </div>
+    </div>
+    <div id="calInsight" style="margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--muted);padding:14px 18px;border:1px solid var(--border);line-height:1.8;border-left:3px solid var(--gold)"></div>
+  </div>
+  <div id="tab-items" class="tab-panel">
+    <div class="chart-card">
+      <div class="cc-bl"></div><div class="cc-br"></div>
+      <div class="cc-head"><div class="cc-title">Per-item agreement</div><div class="cc-sub">PROPORTION OF ANNOTATORS IN AGREEMENT · RED = NEEDS REVIEW</div></div>
+      <div class="legend">
+        <div class="leg-i"><div class="leg-dot" style="background:#5BBFA0"></div>≥ 80%</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#C8A44A"></div>60–79%</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#C45A5A"></div>&lt; 60%</div>
+      </div>
+      <div id="itWrap" style="position:relative"><canvas id="itChart" role="img" aria-label="Per-item agreement"></canvas></div>
+    </div>
+  </div>
+  <div id="tab-cmp" class="tab-panel">
+    <div class="chart-card">
+      <div class="cc-bl"></div><div class="cc-br"></div>
+      <div class="cc-head"><div class="cc-title">Metric comparison</div><div class="cc-sub">ALL IAA SCORES SIDE-BY-SIDE · DASHED = 0.8 EXCELLENT THRESHOLD</div></div>
+      <div style="position:relative;height:260px"><canvas id="cmpChart" role="img" aria-label="Metric comparison"></canvas></div>
+    </div>
+  </div>
+  <div id="tab-bm" class="tab-panel">
+    <div class="chart-card">
+      <div class="cc-bl"></div><div class="cc-br"></div>
+      <div class="cc-head"><div class="cc-title">Published IAA benchmarks</div><div class="cc-sub">HOW YOUR DATASET COMPARES TO PUBLISHED STUDIES</div></div>
+      <div class="bmark-grid" id="bmGrid"></div>
+    </div>
+  </div>
+  <div style="margin-top:32px">
+    <div class="sec-lbl">ANALYSIS INTERPRETATION</div>
+    <div class="ai-panel">
+      <div class="ai-head">
+        <div class="ai-head-icon">✦</div>
+        <div class="ai-head-title">RELIABILITY ANALYSIS</div>
+        <span class="ai-head-badge">AI-POWERED</span>
+        <span class="ai-head-ts" id="aiTs"></span>
+      </div>
+      <div class="ai-body">
+        <div class="ai-text">
+          <div class="ai-loading" id="aiLoad"><div class="dot"></div><div class="dot"></div><div class="dot"></div>&nbsp;ANALYZING ANNOTATION PATTERNS…</div>
+          <div id="aiOut" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="export-bar">
+    <div class="export-meta" id="expMeta"></div>
+    <div class="export-acts">
+      <button class="btn-outline" onclick="copyJSON()">{ } JSON</button>
+      <button class="btn-outline" onclick="copyReport()">TXT REPORT</button>
+      <button class="btn-outline" id="pdfBtn" onclick="doPDF()">PDF EXPORT</button>
+      <button class="btn-gold" onclick="askTips()">✦ IMPROVEMENT TIPS</button>
+    </div>
+  </div>
+</section>
+
+<!-- SVG ART STRIP -->
+<div class="img-strip">
+  <div class="isp">
+    <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="800" height="420" fill="#0D0C0A"/>
+      <defs><pattern id="g1" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(240,235,225,0.04)" stroke-width="0.5"/></pattern></defs>
+      <rect width="800" height="420" fill="url(#g1)"/>
+      <g opacity="0.7">
+        <rect x="60"  y="80"  width="40" height="120" fill="#B8A882" opacity="0.8"/>
+        <rect x="120" y="140" width="40" height="60"  fill="#F0EBE1" opacity="0.4"/>
+        <rect x="180" y="60"  width="40" height="140" fill="#B8A882" opacity="0.6"/>
+        <rect x="240" y="100" width="40" height="100" fill="#F0EBE1" opacity="0.3"/>
+        <rect x="300" y="50"  width="40" height="150" fill="#B8A882" opacity="0.9"/>
+        <rect x="360" y="120" width="40" height="80"  fill="#F0EBE1" opacity="0.45"/>
+        <rect x="420" y="90"  width="40" height="110" fill="#B8A882" opacity="0.7"/>
+        <rect x="480" y="70"  width="40" height="130" fill="#F0EBE1" opacity="0.35"/>
+        <rect x="540" y="110" width="40" height="90"  fill="#B8A882" opacity="0.8"/>
+        <rect x="600" y="55"  width="40" height="145" fill="#F0EBE1" opacity="0.4"/>
+        <rect x="660" y="95"  width="40" height="105" fill="#B8A882" opacity="0.6"/>
+        <rect x="720" y="75"  width="40" height="125" fill="#F0EBE1" opacity="0.5"/>
+      </g>
+      <line x1="40" y1="200" x2="760" y2="200" stroke="rgba(184,168,130,0.3)" stroke-width="1" stroke-dasharray="6 4"/>
+      <text x="40" y="380" font-family="Space Mono" font-size="10" fill="rgba(240,235,225,0.3)" letter-spacing="3">DATA PRECISION</text>
+      <text x="40" y="395" font-family="Space Mono" font-size="8"  fill="rgba(184,168,130,0.3)" letter-spacing="2">SYS://METRIC_OUTPUT</text>
+    </svg>
+    <div class="isp-label">DATA PRECISION</div>
+  </div>
+  <div class="isp">
+    <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="420" fill="#171512"/>
+      <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(184,168,130,0.2)"/></pattern></defs>
+      <rect width="400" height="420" fill="url(#dots)"/>
+      <g stroke="rgba(184,168,130,0.25)" stroke-width="1" fill="none">
+        <line x1="200" y1="0"   x2="200" y2="420"/>
+        <line x1="0"   y1="210" x2="400" y2="210"/>
+        <circle cx="200" cy="210" r="60"/>
+        <circle cx="200" cy="210" r="100"/>
+        <circle cx="200" cy="210" r="150"/>
+      </g>
+      <g fill="rgba(184,168,130,0.7)">
+        <circle cx="200" cy="150" r="5"><animate attributeName="r" values="5;8;5" dur="3s"   repeatCount="indefinite"/></circle>
+        <circle cx="260" cy="210" r="4"><animate attributeName="r" values="4;7;4" dur="4s"   repeatCount="indefinite"/></circle>
+        <circle cx="200" cy="270" r="6"><animate attributeName="r" values="6;9;6" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="140" cy="210" r="4"><animate attributeName="r" values="4;6;4" dur="3.5s" repeatCount="indefinite"/></circle>
+      </g>
+      <text x="20" y="400" font-family="Space Mono" font-size="8" fill="rgba(184,168,130,0.3)" letter-spacing="2">PROTOCOL</text>
+    </svg>
+    <div class="isp-label">PROTOCOL</div>
+  </div>
+  <div class="isp">
+    <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="420" fill="#1F1D1A"/>
+      <defs><pattern id="g3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(240,235,225,0.03)" stroke-width="0.5"/></pattern></defs>
+      <rect width="400" height="420" fill="url(#g3)"/>
+      <g fill="none" stroke-width="1.5">
+        <polyline points="0,100 80,80 160,120 240,70 320,110 400,85"   stroke="rgba(240,235,225,0.35)"><animate attributeName="points" values="0,100 80,80 160,120 240,70 320,110 400,85;0,110 80,95 160,105 240,85 320,100 400,75;0,100 80,80 160,120 240,70 320,110 400,85" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></polyline>
+        <polyline points="0,180 80,160 160,200 240,150 320,190 400,165" stroke="rgba(184,168,130,0.5)" stroke-width="2"><animate attributeName="points" values="0,180 80,160 160,200 240,150 320,190 400,165;0,170 80,190 160,160 240,175 320,165 400,185;0,180 80,160 160,200 240,150 320,190 400,165" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></polyline>
+        <polyline points="0,270 80,250 160,290 240,240 320,280 400,255" stroke="rgba(240,235,225,0.2)"><animate attributeName="points" values="0,270 80,250 160,290 240,240 320,280 400,255;0,260 80,275 160,255 240,270 320,250 400,270;0,270 80,250 160,290 240,240 320,280 400,255" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></polyline>
+        <polyline points="0,340 80,320 160,360 240,310 320,350 400,325" stroke="rgba(184,168,130,0.3)" stroke-dasharray="6 4"/>
+      </g>
+      <text x="20" y="405" font-family="Space Mono" font-size="8" fill="rgba(240,235,225,0.2)" letter-spacing="2">RELIABILITY</text>
+    </svg>
+    <div class="isp-label">RELIABILITY</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">AGREEMENTLENS™</div>
+      <div class="footer-brand-desc">AN ANNOTATION RELIABILITY SUITE<br>BUILT FOR AI TRAINING TEAMS.<br>MEASURE AGREEMENT. SHIP QUALITY DATA.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">TOOLS</div>
+      <a onclick="document.getElementById('uploadAnchor').scrollIntoView({behavior:'smooth'})">Analyze Data</a>
+      <a onclick="copyReport()">Export Report</a>
+      <a onclick="doPDF()">Download PDF</a>
+      <a onclick="copyJSON()">Export JSON</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">METRICS</div>
+      <a>Krippendorff's α</a>
+      <a>Fleiss' κ</a>
+      <a>Gwet's AC1</a>
+      <a>Cohen's κ (Pairwise)</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-cr">©2025 · SYS://IAA_PROTOCOL_v2.0</div>
+    <div class="footer-by">BUILT BY SHAUN NCHINDA · UIUC APPLIED MATHEMATICS</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
