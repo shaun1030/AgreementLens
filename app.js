@@ -297,4 +297,4 @@ function doPDF(){
   for(let p=1;p<=doc.internal.getNumberOfPages();p++){doc.setPage(p);doc.setFillColor(13,12,10);doc.rect(0,285,W,12,'F');doc.setFontSize(7);doc.setTextColor(100,95,85);doc.text('AGREEMENTLENS™ · BUILT BY SHAUN NCHINDA · UIUC APPLIED MATHEMATICS',M,292);doc.text(`${p}/${doc.internal.getNumberOfPages()}`,W-M,292,{align:'right'});}
   doc.save(`IAA_Report_${new Date().toISOString().slice(0,10)}.pdf`);
   btn.textContent='DOWNLOADED ✓';setTimeout(()=>{btn.textContent='PDF EXPORT';btn.disabled=false;},2200);
-}   
+}
