@@ -176,17 +176,15 @@ IFQ_020,4,4,3`
 
 let lastDemoIndex = -1;
 
-function loadDemo() {
-  // Pick a random demo that isn't the same as last time
+window.loadDemo = function() {
   let idx;
   do { idx = Math.floor(Math.random() * DEMOS.length); }
   while (idx === lastDemoIndex && DEMOS.length > 1);
   lastDemoIndex = idx;
-
   const demo = DEMOS[idx];
   showToast(`DEMO LOADED — ${demo.label.toUpperCase()}`);
   parseIt(demo.csv);
-}
+};
 
 const BENCHMARKS=[
   {domain:'NLP · SENTIMENT',name:'Amazon Product Reviews',alpha:0.74,fleiss:0.71},
@@ -432,13 +430,16 @@ function generateAnalysis(alpha,fleiss,gwet,pw,anns,nItems,type){
   return `${p1}\n\n${p2}\n\n${p3}`;
 }
 
-function swType(btn){document.querySelectorAll('.tgl').forEach(b=>b.classList.remove('on'));btn.classList.add('on');curType=btn.dataset.t;document.getElementById('typeNote').textContent=TDESC[curType];if(pData)compute(pData,curType);}
-function swTab(name,btn){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));btn.classList.add('on');document.getElementById('tab-'+name).classList.add('on');}
+// ── expose all onclick-called functions to global scope ──
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);}
-function clearAll(){pData=null;cM=null;aiOut='';document.getElementById('prevSec').classList.add('hidden');document.getElementById('resSec').classList.add('hidden');document.getElementById('clearBtn').classList.add('hidden');document.getElementById('fileIn').value='';[0,1,2,3].forEach(i=>{const e=document.getElementById(`hv${i}`);if(e)e.textContent='—';const b=document.getElementById(`hb${i}`);if(b)b.style.width='0';});Object.values(CH).forEach(c=>{if(c)c.destroy();});CH={hw:null,cal:null,it:null,cmp:null};}
-function askTips(){const msg='How can I improve inter-annotator agreement in my annotation dataset? Give specific, actionable advice based on IAA best practices.';if(typeof sendPrompt==='function')sendPrompt(msg);else{navigator.clipboard.writeText(msg);showToast('PROMPT COPIED TO CLIPBOARD');}}
-function copyJSON(){if(!cM)return;const{alpha,fleiss,gwet,pw,anns,items,mn,type,ci,avg}=cM;const obj={meta:{timestamp:new Date().toISOString(),items:items.length,annotators:anns,scaleType:type},metrics:{krippendorff_alpha:alpha,fleiss_kappa:fleiss,gwet_ac1:gwet,avg_cohen_kappa:avg,alpha_95ci:ci},pairwise:pw.map(p=>({annotators:[p.a,p.b],cohen_kappa:p.k})),calibration:anns.map((a,i)=>({annotator:a,mean:mn[i]})),interpretation:aiOut.replace(/<[^>]+>/g,'')};navigator.clipboard.writeText(JSON.stringify(obj,null,2)).then(()=>showToast('JSON COPIED TO CLIPBOARD'));}
-function copyReport(){if(!cM)return;const{alpha,fleiss,gwet,pw,anns,items,mn,type,avg}=cM;let r=`INTER-ANNOTATOR RELIABILITY REPORT\n${'─'.repeat(44)}\n${new Date().toLocaleString()} · SCALE: ${type.toUpperCase()}\n\nDATASET\nItems: ${items.length}  ·  Annotators: ${anns.join(', ')}\n\nMETRICS\nKrippendorff's α  ${alpha!==null?alpha.toFixed(3):'N/A'}\nFleiss' κ         ${fleiss!==null?fleiss.toFixed(3):'N/A'}\nGwet's AC1        ${gwet!==null?gwet.toFixed(3):'N/A'}\nAvg Cohen's κ     ${avg!==null?avg.toFixed(3):'N/A'}\n\nPAIRWISE COHEN'S κ\n${pw.map(p=>`  ${p.a} vs ${p.b}: ${p.k!==null?p.k.toFixed(3):'N/A'}`).join('\n')}\n\n`;if(mn)r+=`CALIBRATION\n${anns.map((a,i)=>`  ${a}: ${mn[i]!==null?mn[i].toFixed(2):'N/A'}`).join('\n')}\n\n`;if(aiOut)r+=`AI INTERPRETATION\n${aiOut.replace(/<[^>]+>/g,'')}`;navigator.clipboard.writeText(r).then(()=>showToast('REPORT COPIED TO CLIPBOARD'));}
+
+window.swType   = function(btn){document.querySelectorAll('.tgl').forEach(b=>b.classList.remove('on'));btn.classList.add('on');curType=btn.dataset.t;document.getElementById('typeNote').textContent=TDESC[curType];if(pData)compute(pData,curType);};
+window.swTab    = function(name,btn){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));btn.classList.add('on');document.getElementById('tab-'+name).classList.add('on');};
+window.clearAll = function(){pData=null;cM=null;aiOut='';document.getElementById('prevSec').classList.add('hidden');document.getElementById('resSec').classList.add('hidden');document.getElementById('clearBtn').classList.add('hidden');document.getElementById('fileIn').value='';[0,1,2,3].forEach(i=>{const e=document.getElementById(`hv${i}`);if(e)e.textContent='—';const b=document.getElementById(`hb${i}`);if(b)b.style.width='0';});Object.values(CH).forEach(c=>{if(c)c.destroy();});CH={hw:null,cal:null,it:null,cmp:null};};
+window.askTips  = function(){const msg='How can I improve inter-annotator agreement in my annotation dataset? Give specific, actionable advice based on IAA best practices.';if(typeof sendPrompt==='function')sendPrompt(msg);else{navigator.clipboard.writeText(msg);showToast('PROMPT COPIED TO CLIPBOARD');}};
+window.copyJSON = function(){if(!cM)return;const{alpha,fleiss,gwet,pw,anns,items,mn,type,ci,avg}=cM;const obj={meta:{timestamp:new Date().toISOString(),items:items.length,annotators:anns,scaleType:type},metrics:{krippendorff_alpha:alpha,fleiss_kappa:fleiss,gwet_ac1:gwet,avg_cohen_kappa:avg,alpha_95ci:ci},pairwise:pw.map(p=>({annotators:[p.a,p.b],cohen_kappa:p.k})),calibration:anns.map((a,i)=>({annotator:a,mean:mn[i]})),interpretation:aiOut.replace(/<[^>]+>/g,'')};navigator.clipboard.writeText(JSON.stringify(obj,null,2)).then(()=>showToast('JSON COPIED TO CLIPBOARD'));};
+window.copyReport=function(){if(!cM)return;const{alpha,fleiss,gwet,pw,anns,items,mn,type,avg}=cM;let r=`INTER-ANNOTATOR RELIABILITY REPORT\n${'─'.repeat(44)}\n${new Date().toLocaleString()} · SCALE: ${type.toUpperCase()}\n\nDATASET\nItems: ${items.length}  ·  Annotators: ${anns.join(', ')}\n\nMETRICS\nKrippendorff's α  ${alpha!==null?alpha.toFixed(3):'N/A'}\nFleiss' κ         ${fleiss!==null?fleiss.toFixed(3):'N/A'}\nGwet's AC1        ${gwet!==null?gwet.toFixed(3):'N/A'}\nAvg Cohen's κ     ${avg!==null?avg.toFixed(3):'N/A'}\n\nPAIRWISE COHEN'S κ\n${pw.map(p=>`  ${p.a} vs ${p.b}: ${p.k!==null?p.k.toFixed(3):'N/A'}`).join('\n')}\n\n`;if(mn)r+=`CALIBRATION\n${anns.map((a,i)=>`  ${a}: ${mn[i]!==null?mn[i].toFixed(2):'N/A'}`).join('\n')}\n\n`;if(aiOut)r+=`AI INTERPRETATION\n${aiOut.replace(/<[^>]+>/g,'')}`;navigator.clipboard.writeText(r).then(()=>showToast('REPORT COPIED TO CLIPBOARD'));};
+window.doPDF    = doPDF;
 function doPDF(){
   if(!cM||typeof window.jspdf==='undefined')return;
   const btn=document.getElementById('pdfBtn');btn.textContent='BUILDING…';btn.disabled=true;
