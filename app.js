@@ -8,22 +8,185 @@
   },30);
 })();
 
-const DEMO=`item,Alice,Bob,Carol,David
-Q1,3,3,2,3
-Q2,1,2,1,1
-Q3,4,4,4,3
-Q4,2,2,3,2
-Q5,1,1,1,2
-Q6,3,4,3,3
-Q7,2,2,2,2
-Q8,4,3,4,4
-Q9,1,1,2,1
-Q10,3,3,3,4
-Q11,2,1,2,2
-Q12,4,4,4,4
-Q13,1,2,1,1
-Q14,3,3,2,3
-Q15,2,2,3,2`;
+document.addEventListener('DOMContentLoaded', function() {
+
+
+// ── RANDOMIZED DEMO ENGINE ──
+// 6 realistic annotation scenarios — a new one loads on every press
+
+const DEMOS = [
+
+  // 1. RLHF Response Quality (high agreement, 5 annotators, 1-5 scale)
+  {
+    label: 'RLHF Response Quality',
+    csv: `item,Marcus,Priya,Jordan,Sofia,Kwame
+RESP_001,4,4,3,4,4
+RESP_002,2,2,2,3,2
+RESP_003,5,5,4,5,5
+RESP_004,1,1,2,1,1
+RESP_005,3,4,3,3,3
+RESP_006,2,2,3,2,2
+RESP_007,5,4,5,5,4
+RESP_008,1,2,1,1,2
+RESP_009,3,3,3,4,3
+RESP_010,4,4,4,4,5
+RESP_011,2,3,2,2,2
+RESP_012,1,1,1,2,1
+RESP_013,5,5,5,4,5
+RESP_014,3,3,4,3,3
+RESP_015,4,3,4,4,3
+RESP_016,2,2,2,2,3
+RESP_017,1,1,1,1,2
+RESP_018,4,4,3,5,4
+RESP_019,3,4,3,3,4
+RESP_020,5,5,5,5,4`
+  },
+
+  // 2. Sentiment Labeling (moderate agreement, 3 annotators, nominal: 1=neg 2=neu 3=pos)
+  {
+    label: 'Sentiment Labeling',
+    csv: `item,Anna,Ben,Carlos
+SENT_001,3,3,3
+SENT_002,1,1,2
+SENT_003,2,2,2
+SENT_004,3,2,3
+SENT_005,1,1,1
+SENT_006,2,3,2
+SENT_007,3,3,2
+SENT_008,1,2,1
+SENT_009,2,2,3
+SENT_010,3,3,3
+SENT_011,1,1,1
+SENT_012,2,1,2
+SENT_013,3,3,3
+SENT_014,2,2,1
+SENT_015,1,1,2
+SENT_016,3,2,3
+SENT_017,2,2,2
+SENT_018,1,1,1
+SENT_019,3,3,2
+SENT_020,2,3,3`
+  },
+
+  // 3. Medical Imaging Severity (high agreement, 4 radiologists, 1-4 scale)
+  {
+    label: 'Medical Imaging Severity',
+    csv: `item,Dr_Chen,Dr_Okafor,Dr_Patel,Dr_Novak
+SCAN_001,2,2,2,3
+SCAN_002,4,4,4,4
+SCAN_003,1,1,1,1
+SCAN_004,3,3,2,3
+SCAN_005,2,2,2,2
+SCAN_006,4,3,4,4
+SCAN_007,1,1,2,1
+SCAN_008,3,3,3,3
+SCAN_009,2,2,2,2
+SCAN_010,4,4,4,3
+SCAN_011,1,2,1,1
+SCAN_012,3,3,3,3
+SCAN_013,2,2,2,2
+SCAN_014,4,4,3,4
+SCAN_015,1,1,1,2
+SCAN_016,3,2,3,3
+SCAN_017,2,2,2,2
+SCAN_018,4,4,4,4
+SCAN_019,1,1,1,1
+SCAN_020,3,3,2,3`
+  },
+
+  // 4. Content Toxicity (poor agreement, 5 annotators, 1-3 scale — shows calibration issues)
+  {
+    label: 'Content Toxicity Rating',
+    csv: `item,Zara,Felix,Ingrid,Omar,Yuki
+POST_001,1,2,1,3,1
+POST_002,3,3,2,3,2
+POST_003,1,1,1,2,1
+POST_004,2,3,3,2,3
+POST_005,1,1,2,1,2
+POST_006,3,2,3,3,1
+POST_007,2,2,1,3,2
+POST_008,1,3,1,1,3
+POST_009,2,2,2,2,2
+POST_010,3,3,3,2,3
+POST_011,1,2,3,1,2
+POST_012,2,1,2,3,1
+POST_013,3,3,2,3,2
+POST_014,1,1,1,1,1
+POST_015,2,3,3,2,3
+POST_016,1,2,1,3,2
+POST_017,3,1,3,2,3
+POST_018,2,2,2,2,2
+POST_019,1,3,1,1,3
+POST_020,3,2,3,3,1`
+  },
+
+  // 5. Named Entity Tagging (excellent agreement, 4 annotators, 1=PER 2=ORG 3=LOC 4=MISC)
+  {
+    label: 'Named Entity Tagging',
+    csv: `item,Lena,Raj,Fatima,Tom
+ENT_001,1,1,1,1
+ENT_002,3,3,3,3
+ENT_003,2,2,2,2
+ENT_004,1,1,1,2
+ENT_005,3,3,3,3
+ENT_006,2,2,2,2
+ENT_007,4,4,4,4
+ENT_008,1,1,1,1
+ENT_009,3,3,2,3
+ENT_010,2,2,2,2
+ENT_011,1,1,1,1
+ENT_012,4,4,4,3
+ENT_013,3,3,3,3
+ENT_014,2,1,2,2
+ENT_015,1,1,1,1
+ENT_016,4,4,4,4
+ENT_017,3,3,3,3
+ENT_018,2,2,2,2
+ENT_019,1,1,1,1
+ENT_020,3,3,3,4`
+  },
+
+  // 6. Instruction-Following Quality (mixed agreement, 3 annotators, 1-5 scale, missing data)
+  {
+    label: 'Instruction-Following Quality',
+    csv: `item,Grace,Henri,Isabelle
+IFQ_001,4,4,3
+IFQ_002,2,,2
+IFQ_003,5,4,5
+IFQ_004,1,2,1
+IFQ_005,3,3,
+IFQ_006,4,4,4
+IFQ_007,2,3,2
+IFQ_008,5,5,4
+IFQ_009,,2,3
+IFQ_010,4,4,4
+IFQ_011,1,1,2
+IFQ_012,3,3,3
+IFQ_013,5,4,5
+IFQ_014,2,2,2
+IFQ_015,4,3,4
+IFQ_016,1,,1
+IFQ_017,3,3,3
+IFQ_018,5,5,5
+IFQ_019,2,3,2
+IFQ_020,4,4,3`
+  }
+
+];
+
+let lastDemoIndex = -1;
+
+function loadDemo() {
+  // Pick a random demo that isn't the same as last time
+  let idx;
+  do { idx = Math.floor(Math.random() * DEMOS.length); }
+  while (idx === lastDemoIndex && DEMOS.length > 1);
+  lastDemoIndex = idx;
+
+  const demo = DEMOS[idx];
+  showToast(`DEMO LOADED — ${demo.label.toUpperCase()}`);
+  parseIt(demo.csv);
+}
 
 const BENCHMARKS=[
   {domain:'NLP · SENTIMENT',name:'Amazon Product Reviews',alpha:0.74,fleiss:0.71},
@@ -48,7 +211,7 @@ const dz=document.getElementById('dropZone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over')});
 dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const f=e.dataTransfer.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>parseIt(ev.target.result);r.readAsText(f);});
-function loadDemo(){parseIt(DEMO);}
+
 
 function parseIt(txt){
   const res=Papa.parse(txt.trim(),{header:true,dynamicTyping:true,skipEmptyLines:true});
@@ -297,4 +460,5 @@ function doPDF(){
   for(let p=1;p<=doc.internal.getNumberOfPages();p++){doc.setPage(p);doc.setFillColor(13,12,10);doc.rect(0,285,W,12,'F');doc.setFontSize(7);doc.setTextColor(100,95,85);doc.text('AGREEMENTLENS™ · BUILT BY SHAUN NCHINDA · UIUC APPLIED MATHEMATICS',M,292);doc.text(`${p}/${doc.internal.getNumberOfPages()}`,W-M,292,{align:'right'});}
   doc.save(`IAA_Report_${new Date().toISOString().slice(0,10)}.pdf`);
   btn.textContent='DOWNLOADED ✓';setTimeout(()=>{btn.textContent='PDF EXPORT';btn.disabled=false;},2200);
-}
+}  
+}); // end DOMContentLoaded
